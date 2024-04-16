@@ -1,11 +1,27 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import SearchBar from "./Components/SearchBar";
+import ProductsList from "./Components/ProductsList";
+import products from "./data.js";
 
 export default function App() {
+  const [search, setSearch] = useState('');
+  const [filteredProducts, setFilteredProducts] = useState(products);
+  
+  useEffect(() => {
+    if (search === '') {
+      setFilteredProducts(products);
+    } else {
+      const filtered = products.filter(product => product.name.includes(search));
+      setFilteredProducts(filtered);
+    }
+  }, [search]);
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <SearchBar value={search} onChangeText={setSearch}/>
+      <ProductsList products={filteredProducts}/>
+      {/* {console.log(filteredProducts)} */}
     </View>
   );
 }
@@ -16,5 +32,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-  },
+  }
 });
