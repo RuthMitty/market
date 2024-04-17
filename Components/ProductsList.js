@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, ScrollView, StyleSheet } from 'react-native';
+import { FlatList, StyleSheet } from 'react-native';
 import ProductItems from "./ProductItems";
 
 const ProductList = ({products}) => {
@@ -15,7 +15,6 @@ const ProductList = ({products}) => {
                 <ProductItems product={item}/>
             )}
         />
-        {console.log(products)}
         </>
     );
 }
@@ -24,6 +23,7 @@ const styles = StyleSheet.create({
     flatlist: {
         top: 150,
         backgroundColor: '#FAECE6',
+        padding: 10
     }
 })
 
